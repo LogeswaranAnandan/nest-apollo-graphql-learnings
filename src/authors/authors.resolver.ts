@@ -10,8 +10,14 @@ export class AuthorsResolver {
   @Query()
   async author(@Args('id') id: number) {
     console.log('inside author');
-    const author = mockAuthors.find(author => author.id === id);
-    return author
+    const data = await new Promise((resolve) => {
+      const author = mockAuthors.find(author => author.id === id);
+      setTimeout(() => {
+        resolve(author)
+      }, 5000);
+    }); 
+    console.log('exiting author');
+    return data;
   }
 
   /* NOTE: RESOLVER CHAIN TAKEAWAY
