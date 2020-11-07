@@ -9,14 +9,26 @@ export class AuthorsResolver {
     
   @Query()
   async author(@Args('id') id: number) {
-    console.log('inside author');
+    console.log(`Entering :: Query :: author :: id = ${id}`);
     const data = await new Promise((resolve) => {
       const author = mockAuthors.find(author => author.id === id);
       setTimeout(() => {
         resolve(author)
       }, 5000);
     }); 
-    console.log('exiting author');
+    console.log(`Exiting :: Query :: author :: id = ${id}`);
+    return data;
+  }
+
+  @Query()
+  async authors() {
+    console.log(`Entering :: Query :: authors`);
+    const data = await new Promise((resolve) => {
+      setTimeout(() => {
+        resolve(mockAuthors)
+      }, 5000);
+    }); 
+    console.log(`Exiting :: Query :: authors`);
     return data;
   }
 
@@ -29,29 +41,27 @@ export class AuthorsResolver {
    */
   @ResolveField()
   async firstName(@Parent() author: Author) {
-    console.log('inside firstName');
+    console.log(`Entering :: Resolve :: firstName :: author id = ${author.id}`);
     const data = await new Promise((resolve, reject) => {
       const firstName: string = 'Prefix_' + author.firstName + '_Suffix';
       setTimeout(() => {
-        console.log('resolving firstname');
         resolve(firstName);
       }, 1000)
     });
-    console.log('exiting resolve firstname');
+    console.log(`Exiting :: Resolve :: firstName :: author id = ${author.id}`);
     return data;
   }
 
   @ResolveField()
   async posts(@Parent() author: Author) {
-    console.log('inside resolve posts');
+    console.log(`Entering :: Resolve :: posts :: author id = ${author.id}`);
     const data = await new Promise((resolve) => {
       const filteredPosts =  mockPosts.filter(post => author.posts.find(postId => postId == post.id));
       setTimeout(() => {
-        console.log('resolving posts');
         resolve(filteredPosts);
       }, 1000);
     });
-    console.log('exiting resolve posts');
+    console.log(`Exiting :: Resolve :: posts :: author id = ${author.id}`);
     return data;
   }
 

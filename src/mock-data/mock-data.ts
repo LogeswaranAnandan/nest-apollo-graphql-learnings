@@ -40,32 +40,38 @@ const mockPosts: Post[] = [
     {
         id: 1,
         title: 'title 1',
-        votes: 10
+        votes: 10,
+        commenters: [
+            1
+        ]
     },
     {
         id: 2,
         title: 'title 2',
-        votes: 20
+        votes: 20,
     },
     {
         id: 3,
         title: 'title 3',
-        votes: 30
+        votes: 30,
+        commenters: [
+            3
+        ]
     },
     {
         id: 4,
         title: 'title 4',
-        votes: 40
+        votes: 40,
     },
     {
         id: 5,
         title: 'title 5',
-        votes: 50
+        votes: 50,
     },
     {
         id: 6,
         title: 'title 6',
-        votes: 60
+        votes: 60,
     },
 ];
 

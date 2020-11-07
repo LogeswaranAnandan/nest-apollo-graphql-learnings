@@ -3,13 +3,16 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AuthorsModule } from './authors/authors.module';
+import { PostModule } from './post/post.module';
 
 @Module({
-  imports: [AuthorsModule,
-  GraphQLModule.forRoot({
-    typePaths: ['./src/**/*.graphql']
-  })
-],
+  imports: [
+    GraphQLModule.forRoot({
+      typePaths: ['./src/**/*.graphql']
+    }),
+    AuthorsModule,
+    PostModule
+  ],
   controllers: [AppController],
   providers: [AppService],
 })
