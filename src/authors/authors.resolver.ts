@@ -9,26 +9,26 @@ export class AuthorsResolver {
     
   @Query()
   async author(@Args('id') id: number) {
-    console.log(`Entering :: Query :: author :: id = ${id}`);
+    console.log(`Entering\t :: Query :: author :: id = ${id}`);
     const data = await new Promise((resolve) => {
       const author = mockAuthors.find(author => author.id === id);
       setTimeout(() => {
         resolve(author)
-      }, 5000);
+      }, 2000);
     }); 
-    console.log(`Exiting :: Query :: author :: id = ${id}`);
+    console.log(`Exiting\t\t :: Query :: author :: id = ${id}`);
     return data;
   }
 
   @Query()
   async authors() {
-    console.log(`Entering :: Query :: authors`);
+    console.log(`Entering\t :: Query :: authors`);
     const data = await new Promise((resolve) => {
       setTimeout(() => {
         resolve(mockAuthors)
-      }, 5000);
+      }, 2000);
     }); 
-    console.log(`Exiting :: Query :: authors`);
+    console.log(`Exiting\t\t :: Query :: authors`);
     return data;
   }
 
@@ -41,27 +41,27 @@ export class AuthorsResolver {
    */
   @ResolveField()
   async firstName(@Parent() author: Author) {
-    console.log(`Entering :: Resolve :: firstName :: author id = ${author.id}`);
+    console.log(`Entering\t :: Resolve :: firstName :: author id = ${author.id}`);
     const data = await new Promise((resolve, reject) => {
       const firstName: string = 'Prefix_' + author.firstName + '_Suffix';
       setTimeout(() => {
         resolve(firstName);
-      }, 1000)
+      }, 1500)
     });
-    console.log(`Exiting :: Resolve :: firstName :: author id = ${author.id}`);
+    console.log(`Exiting\t\t :: Resolve :: firstName :: author id = ${author.id}`);
     return data;
   }
 
   @ResolveField()
   async posts(@Parent() author: Author) {
-    console.log(`Entering :: Resolve :: posts :: author id = ${author.id}`);
+    console.log(`Entering\t :: Resolve :: posts :: author id = ${author.id}`);
     const data = await new Promise((resolve) => {
       const filteredPosts =  mockPosts.filter(post => author.posts.find(postId => postId == post.id));
       setTimeout(() => {
         resolve(filteredPosts);
-      }, 1000);
+      }, 2000);
     });
-    console.log(`Exiting :: Resolve :: posts :: author id = ${author.id}`);
+    console.log(`Exiting\t\t :: Resolve :: posts :: author id = ${author.id}`);
     return data;
   }
 
