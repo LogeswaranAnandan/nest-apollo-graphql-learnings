@@ -5,8 +5,8 @@ import { Post } from 'src/models/post';
 @Resolver('Post')
 export class PostResolver {
 
-  @Query()
-  async posts() {
+  @Query('posts')
+  async getPosts() {
     console.log('Entering\t :: Query :: posts');
     const data = await new Promise((resolve) => {
       setTimeout(() => {
@@ -17,8 +17,8 @@ export class PostResolver {
     return data;
   }
 
-  @ResolveField()
-  async commenters(@Parent() post: Post) {
+  @ResolveField('commenters')
+  async resolveCommenters(@Parent() post: Post) {
     console.log(`Entering\t :: Resolve :: commenters :: post id = ${post.id}`);
     const data = await new Promise((resolve) => {
       const filteredAuthors =  mockAuthors.filter(author => post.commenters.find(authorId => authorId == author.id));

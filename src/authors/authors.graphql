@@ -12,8 +12,15 @@ type Post {
   commenters: [Author]
 }
 
+input AuthorInput {
+  id: Int!
+  firstName: String
+  lastName: String
+}
+
 type Query {
   author(id: Int!): Author
   authors: [Author]
   posts: [Post]
+  createAuthor(authorInput: AuthorInput!): Author 
 }
